@@ -19,6 +19,7 @@ library(knitr)
 library(pander)
 library(seer)
 library(Mcomp)
+library(tsfeatures)
 # Set so that long lines in R will be wrapped:
 opts_chunk$set(tidy.opts=list(width.cutoff=50),tidy=TRUE)
 opts_chunk$set(fig.lp = '')
@@ -120,48 +121,7 @@ Develop a framework that automates the selection of the most appropriate forecas
 - Calculate the features of a time series and use the pre-trained classifier to identify the best forecasting method.
 
 
-# FFORMS: population
-
- \centerline{\includegraphics[width=\paperwidth]{figures/fw1.png}}
-
-# FFORMS: observed sample
-
- \centerline{\includegraphics[width=\paperwidth]{figures/fw2.png}}
- 
-# FFORMS: simulated time series
-
- \centerline{\includegraphics[width=\paperwidth]{figures/fw3.png}}
- 
-# FFORMS: reference set
- 
- \centerline{\includegraphics[width=\paperwidth]{figures/fw4.png}}
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw5.png}}
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw6.png}}
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw7.png}}
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw8.png}}
-
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw9.png}}
-
-# FFORMS: Meta-data
-
-\centerline{\includegraphics[width=\paperwidth]{figures/fw10.png}}
-
-# FFORMS: Random-forest classifier
+# FFORMS: "offline" part of the algorithm
 
 \centerline{\includegraphics[width=\paperwidth]{figures/fw11.png}}
 
@@ -179,6 +139,43 @@ Develop a framework that automates the selection of the most appropriate forecas
 
 \centerline{\includegraphics[width=\paperwidth]{figures/fw14.png}}
 
+
+# R package: seer
+
+## Installation
+
+```r
+devtools::install_github("thiyangt/seer")
+library(seer)
+```
+\pause
+
+## Example data set:
+
+```r
+library(Mcomp)
+yearly_m3 <- subset(M3, "yearly")
+yearly_m3
+```
+##
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
+library(Mcomp)
+yearly_m3 <- subset(M3, "yearly")
+yearly_m3
+```
+
+# Input: features
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(seer)
+library(tsfeatures)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
+cal_features(yearly_m3, database="M3", h=6, highfreq=FALSE) %>% head(3)
+
+```
 
 # Discussion and Conclusions
 
