@@ -14,11 +14,10 @@ output:
         in_header: header_pagenrs.tex
 ---
 
-```{r initial, echo = FALSE, cache = TRUE, include = FALSE}
+```{r initial, echo = FALSE, cache = FALSE, include = FALSE}
 library(knitr)
 library(pander)
 library(seer)
-library(Mcomp)
 library(tsfeatures)
 # Set so that long lines in R will be wrapped:
 opts_chunk$set(tidy.opts=list(width.cutoff=50),tidy=TRUE)
@@ -154,28 +153,123 @@ library(seer)
 
 ```r
 library(Mcomp)
-yearly_m3 <- subset(M3, "yearly")
-yearly_m3
+yearly_m1 <- subset(M1, "yearly")
+yearly_m1
 ```
 ##
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
 library(Mcomp)
-yearly_m3 <- subset(M3, "yearly")
-yearly_m3
+yearlym1 <- subset(M1, "yearly")
+yearlym1
+yearlym3 <- subset(M3, "yearly")
+yearlym3
 ```
 
 # Input: features
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(seer)
-library(tsfeatures)
+
+```r
+cal_features(yearlym1[1:3], database="M3",
+h=6, highfreq=FALSE)
+
+```
+\fontsize{8}{10}\sf
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
+seer::cal_features(yearlym1[1:3], database="M3", h=6, highfreq=FALSE) 
+```
+
+# Output: labels
+
+```r
+fcast_accuracy(yearlym1[1:3],
+  models=c("arima","ets","rw","rwd","theta","nn"),
+  database="M3", cal_MASE, h=6, length_out=1)
+```
+\fontsize{8}{10}\sf
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
+fcast_accuracy(yearlym1[1:3],
+  models=c("arima","ets","rw","rwd","theta","nn"),
+  database="M3", cal_MASE, h=6, length_out=1)
+
+```
+
+# Reference set
+
+\fontsize{8}{10}\sf
+
+```r
+accuracy_m1 <- fcast_accuracy(tslist=yearlym1, 
+models= c("arima","ets","rw","rwd", "theta", "nn"), 
+database ="M1", cal_MASE)
+
+features_m1 <- cal_features(yearlym1, database="M1", highfreq = FALSE)
+
+reference_set <- prepare_trainingset(accuracy_set = accuracy_m1,
+feature_set = features_m1)
+head(reference_set$trainingset, 1)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
-cal_features(yearly_m3, database="M3", h=6, highfreq=FALSE) %>% head(3)
+accuracy_m1 <- fcast_accuracy(tslist=yearlym1, models= c("arima","ets","rw","rwd", "theta", "nn"), database ="M1", cal_MASE)
+features_m1 <- cal_features(yearlym1, database="M1",highfreq = FALSE)
+
+ref_set <- prepare_trainingset(accuracy_set = accuracy_m1, feature_set = features_m1)
+head(ref_set$trainingset, 1)
+```
+
+# FFORMS classifier
+
+```r
+ym3_features <- cal_features(yearlym3,
+                database="M3", highfreq = FALSE)
+                
+fforms <- build_rf(training_set = ref_set$trainingset,
+          testset=ym3_features,  rf_type="rcp",
+            ntree=100, seed=7, import=FALSE)
+
+fforms$predictions %>% head(10)
+```
+\fontsize{8}{10}\sf
+
+```{r}
+ym3_features <- cal_features(yearlym3,
+                                  database="M3", 
+                              highfreq = FALSE)
+
+fforms <- build_rf(training_set = ref_set$trainingset,
+                   testset=ym3_features,  rf_type="rcp",
+                   ntree=100, seed=7, import=FALSE)
+
+# to get the predicted class labels
+fforms$predictions %>% head(20)
+
 
 ```
+
+# Generate point foecasts and 95% prediction intervals
+
+\fontsize{8}{10}\sf
+
+```r
+rf_forecast(fforms$predictions[1:2],
+tslist=yearlym3[1:2], database="M3", function_name="cal_MASE", 
+h=6, accuracy=TRUE)
+
+```
+
+```{r}
+rf_forecast(fforms$predictions[1:2],tslist=yearlym3[1:2],
+                         database="M3", function_name="cal_MASE", h=6, accuracy=TRUE)
+
+```
+
+
+
+
 
 # Discussion and Conclusions
 
