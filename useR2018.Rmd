@@ -277,9 +277,26 @@ rf_forecast(fforms$predictions[1:2],tslist=yearlym3[1:2],
 
 ```
 
-# Additional functions
+# Augmenting the observed sample with simutated time series
 
-## Augmenting the observed sample with simutated time series
+```r
+lapply(yearlym1[1], sim_arimabased, Nsim=2)
+```
+\fontsize{6}{7}\sf
+
+
+```{r}
+lapply(yearlym1[1], sim_arimabased, Nsim=2)
+```
+
+\pause
+\fontsize{10}{10}\sf
+
+```r
+lapply(yearlym1[1], sim_etsbased, Nsim=2)
+lapply(yearlym1[1], sim_mstlbased, Nsim=2)
+```
+
 
 
 
