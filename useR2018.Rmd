@@ -77,8 +77,6 @@ Develop a framework that automates the selection of the most appropriate forecas
 
 # Time series features
 
-
-
 \begin{columns}
 \begin{column}{0.48\textwidth}
    \begin{itemize}
@@ -141,29 +139,40 @@ Develop a framework that automates the selection of the most appropriate forecas
 
 # R package: seer
 
-## Installation
-
+\textbf{Installation}
 ```r
 devtools::install_github("thiyangt/seer")
 library(seer)
 ```
+\begin{tikzpicture}[remember picture,overlay]  
+  \node [xshift=-2cm,yshift=-2cm] at (current page.north east)
+    {\includegraphics[width=\textwidth,height=3cm,keepaspectratio]{figures/seer.png}};
+\end{tikzpicture}
+
 \pause
 
-## Example data set:
+\textbf{Example datasets}
+
+\colorbox{blue}{\textbf{\color{white}{observed time series - M1 yearly series (181)}}}
 
 ```r
 library(Mcomp)
-yearly_m1 <- subset(M1, "yearly")
-yearly_m1
+yearlym1 <- subset(M1, "yearly")
 ```
-##
+\pause
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
 library(Mcomp)
 yearlym1 <- subset(M1, "yearly")
-yearlym1
+```
+
+\colorbox{red}{\textbf{\color{white}{new time series - M3 yearly series (645)}}}
+```r
 yearlym3 <- subset(M3, "yearly")
-yearlym3
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, comment=NA, size='tiny'}
+yearlym3 <- subset(M3, "yearly")
 ```
 
 # Input: features
@@ -268,7 +277,9 @@ rf_forecast(fforms$predictions[1:2],tslist=yearlym3[1:2],
 
 ```
 
+# Additional functions
 
+## Augmenting the observed sample with simutated time series
 
 
 
@@ -294,12 +305,6 @@ rf_forecast(fforms$predictions[1:2],tslist=yearlym3[1:2],
 \vspace{0.3cm}
  \centerline{available at: \textcolor{blue}{\underline{https://github.com/thiyangt/seer}}}
 
-## Installation
-
-```r
-devtools::install_github("thiyangt/seer")
-library(seer)
-```
 \pause
 
 ##
