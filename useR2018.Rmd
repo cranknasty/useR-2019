@@ -1,5 +1,5 @@
 ---
-title: "seer: R package for featue-based forecast model selection"
+title: "seer: R package for feature-based forecast model selection"
 author: 
 - Thiyanga S Talagala \newline
 - Rob J Hyndman \newline
