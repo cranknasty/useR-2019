@@ -314,7 +314,7 @@ Rank = c(1.50, 1.50, 3.33, 5.00, 8.00, 7.00, 3.67, 6.00)
 class=c(0,0,0,0,0,0,0,0)
 df <- data.frame(method=method, Rank=Rank, class=class)
 p1 <- ggplot(data=df, aes(x=method,y=Rank,fill=factor(class))) +
-  geom_bar(position="dodge",stat="identity") + 
+  geom_bar(position="dodge",stat="identity", width=0.7) + 
   coord_flip() +
    scale_x_discrete(
     limits=c("WN", "RW", "auto.arima", "ets", "Theta", "RWD", "RF-class priors", "RF-unbalanced"),
@@ -329,7 +329,7 @@ Rank = c(1.00, 2.63, 5.25, 3.00, 10.00, 7.50, 5.38, 8.63, 3.88, 7.75)
 class=c(0,0,0,0,0,0,0,0,0, 0)
 df <- data.frame(method=method, Rank=Rank, class=class)
 p2 <- ggplot(data=df, aes(x=method,y=Rank,fill=factor(class))) +
-  geom_bar(position="dodge",stat="identity") + 
+  geom_bar(position="dodge",stat="identity", width=0.7) + 
   coord_flip() +
    scale_x_discrete(
     limits=c("WN","RW",  "RWD","STL-AR", "Snaive", "auto.arima", "ets","Theta", "RF-class priors", "RF-unbalanced"),
@@ -343,7 +343,7 @@ Rank = c(1.77, 2.83, 4.94, 3.44, 10.00, 7.25, 8.61, 7.38, 2.27, 6.47)
 class=c(0,0,0,0,0,0,0,0,0, 0)
 df <- data.frame(method=method, Rank=Rank, class=class)
 p3 <- ggplot(data=df, aes(x=method,y=Rank,fill=factor(class))) +
-  geom_bar(position="dodge",stat="identity") + 
+  geom_bar(position="dodge",stat="identity", width=0.7) + 
   coord_flip() +
    scale_x_discrete(
     limits=c("WN","RW", "RWD","STL-AR",  "Snaive", "auto.arima", "ets","Theta", "RF-class priors", "RF-unbalanced"),
