@@ -297,11 +297,11 @@ lapply(yearlym1[1], sim_etsbased, Nsim=2)
 lapply(yearlym1[1], sim_mstlbased, Nsim=2)
 ```
 
-# Experiment 1: Distribution of time series in the PCA space
+# Application: Distribution of time series in the PCA space
 \colorbox{black}{\color{white}{observed - M1}} \colorbox{ao(english)}{simulated} \colorbox{orange}{new - M3}
   \centerline{\includegraphics[width=\textwidth,height=7.5cm,keepaspectratio]{figures/exp1pca-1.pdf}}
   
-# Results: Experiment 1
+# Results
 
 ```{r multiplot, echo=FALSE}
 
@@ -356,7 +356,7 @@ multiplot(p1, p2, p3, cols=3)
 ```
 
 
-# Discussion and Conclusions
+# Discussion
 
 \begin{itemize}[<+->]
 
@@ -387,3 +387,5 @@ paper: https://robjhyndman.com/publications/fforms/
 
 Email: thiyanga.talagala@monash.edu
 
+##
+twitter: thiyangt
