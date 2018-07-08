@@ -2,6 +2,7 @@ base
 knitr
 pander
 seer
+tsfeatures
 forecast
 Mcomp
-tsfeatures
+ggplot2
