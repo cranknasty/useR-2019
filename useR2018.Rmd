@@ -252,14 +252,15 @@ fforms$predictions %>% head(20)
 
 # Generate point foecasts and 95% prediction intervals
 
-\fontsize{8}{10}\sf
 
 ```r
 rf_forecast(fforms$predictions[1:2],
-tslist=yearlym3[1:2], database="M3", function_name="cal_MASE", 
-h=6, accuracy=TRUE)
+tslist=yearlym3[1:2], database="M3", 
+function_name="cal_MASE", h=6, accuracy=TRUE)
 
 ```
+
+\fontsize{8}{10}\sf
 
 ```{r}
 rf_forecast(fforms$predictions[1:2],tslist=yearlym3[1:2],
